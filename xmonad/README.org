@@ -1,0 +1,120 @@
+#+MACRO: kbd @@html:<kbd>@@$1@@html:</kdb>@@
+
+* xmonad-config
+  
+xmonad-config is my [[http://xmonad.org/][xmonad]] configuration was inspired by [[https://github.com/vicfryzel/xmonad-config][Vic Fryzel]], [[https://gist.github.com/gilbertw1/c33e79eb76fcb5a47411da881c621639][gilbertw1]] and [[https://github.com/altercation/dotfiles-tilingwm][Ethan Schoonover]] 
+* Introduction
+  
+If you are unfamiliar with xmonad, it is a tiling window manager that is notoriously minimal, stable, beautiful, and featureful.  If you find yourself spending a lot of time organizing or managing windows, you may consider trying xmonad.
+
+However, xmonad can be somewhat difficult to configure if you're new to Haskell or even to xmonad itself.
+
+This project contains a completely working and very usable xmonad configuration "out of the box".  If you are just starting out with xmonad, this will give you a configuration that I personally use every day. Thought it has been put into the colors, key bindings, layouts, and supplementary scripts to make life easier.
+
+This project is also recommended for advanced xmonad users, who may just not want to reinvent the wheel.  All source provided with this project is well documented and simple to customize.
+
+[[file:screenshots/screenshot1.png]]
+[[file:screenshots/screenshot2.png]]
+* Requirements
+  
+- xmonad
+- xmonad-contrib
+- [[http://projects.haskell.org/xmobar/][xmobar]]
+- [[http://stalonetray.sourceforge.net/][stalonetray]]
+- [[https://davedavenport.github.io/rofi/][rofi]]
+** Installing requirements on [[http://www.archlinux.org/][Arch Linux]]
+   #+BEGIN_SRC 
+sudo pacman -S xmonad xmonad-contrib xmobar stalonetray \
+xcompmgr rofi
+   #+END_SRC
+** Installing requirements on [[http://www.ubuntu.com/][Ubuntu Linux]]
+   #+BEGIN_SRC 
+sudo aptitude install xmonad libghc-xmonad-contrib-dev xmobar stalonetray \
+rofi
+   #+END_SRC
+* Installation
+  
+Installing xmonad-config is a matter of backing up any xmonad configuration you may already have, cloning the git repository, and updating your PATH.
+#+BEGIN_SRC 
+cd
+mv .xmonad .xmonad.orig
+git clone https://github.com/randomthought/xmonad-config.git .xmonad
+#+END_SRC
+Once xmonad-config is installed, you also need to ensure you can actually start xmonad. The mechanism to do this varies based on each environment, but here are some instructions for some common login managers.
+** Starting xmonad from lightdm, xdm, kdm, or gdm
+   #+BEGIN_SRC 
+ln -s ~/.xmonad/bin/xsession ~/.xsession
+# Logout, login from lightdm/xdm/kdm/gdm
+   #+END_SRC
+** Starting xmonad from slim
+   #+BEGIN_SRC 
+ln -s ~/.xmonad/bin/xsession ~/.xinitrc
+# Logout, login from slim
+   #+END_SRC
+* Keyboard shortcuts
+  
+After starting xmonad, use the following keyboard shortcuts to function in your new window manager. I recommend you print these out so that you don't get stranded once you logout and back in. 
+
+| *Key Binding*                                                | *Action*                                                                      |
+|--------------------------------------------------------------+-------------------------------------------------------------------------------|
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(Return)}}}            | Start a terminal                                                              |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(0)}}}                  | Lock screen                                                                   |
+| {{{kbd(Win)}}}+{{{kbd(p)}}}                                  | Start dmenu.  Once it comes up, type the name of a program and enter          |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(p)}}}                 | Take screenshot in select mode. Click or click and drag to select             |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(Shift)}}}+{{{kbd(p)}}} | Take fullscreen screenshot. Supports multiple monitors                        |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(c)}}}                 | Close focused window                                                          |
+| {{{kbd(Win)}}}+{{{kbd(Space)}}}                              | Change workspace layout                                                       |
+| {{{kbd(Win)}}}+{{{kbd(r)}}}                                  | Rotates a split between vertical and horizontal (BinarySpacePartition layout) |
+| {{{kbd(Win)}}}+{{{kbd(s)}}}                                  | Swaps to sibling nodes (BinarySpacePartition layout)                          |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(Space)}}}             | Change back to default workspace layout                                       |
+| {{{kbd(Win)}}}+{{{kbd(n)}}}                                  | Resize viewed windows to the correct size                                     |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(Left)}}}               | Tab current focused window with the window to the left                        |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(Right)}}}              | Tab current focused window with the window to the right                       |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(Up)}}}                 | Tab current focused window with the window above                              |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(Down)}}}               | Tab current focused window with the window below                              |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(u)}}}                  | Ungroup the current tabbed windows                                            |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(m)}}}                  | Merge all windows in the current workspace to one tabbed window               |
+| {{{kbd(Win)}}}+{{{kbd(Tab)}}}                                | Focus next tabbed window                                                      |
+| {{{kbd(Win)}}}+{{{kbd(Left)}}}                               | Focus on window to the Left                                                   |
+| {{{kbd(Win)}}}+{{{kbd(Right)}}}                              | Focus on window to the Right                                                  |
+| {{{kbd(Win)}}}+{{{kbd(Up)}}}                                 | Focus on window above                                                         |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(Left)}}}              | Swap adjacent window to the left                                              |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(Right)}}}             | Swap adjacent window to the right                                             |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(Up)}}}                | Swap adjacent window above                                                    |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(Down)}}}              | Swap adjacent window below                                                    |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(Left)}}}               | Expand / Shrink window to the left                                            |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(Left)}}}               | Expand / Shrink window to the right                                           |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(Up)}}}                 | Expand / Shrink window to the up                                              |
+| {{{kbd(Win)}}}+{{{kbd(Ctrl)}}}+{{{kbd(Down)}}}               | Expand / Shrink window to the down                                            |
+| {{{kbd(Win)}}}+{{{kbd(h)}}}                                  | Shrink master window area                                                     |
+| {{{kbd(Win)}}}+{{{kbd(l)}}}                                  | Expand master window area                                                     |
+| {{{kbd(Win)}}}+{{{kbd(m)}}}                                  | Focus master window                                                           |
+| {{{kbd(Win)}}}+{{{kbd(Return)}}}                             | Swap focused window with master window                                        |
+| {{{kbd(Win)}}}+{{{kbd(t)}}}                                  | Push floating window back into tiling                                         |
+| {{{kbd(Win)}}}+{{{kbd(,)}}}                                  | Increment number of windows in master window area                             |
+| {{{kbd(Win)}}}+{{{kbd(.)}}}                                  | Decrement number of windows in master window area                             |
+| {{{kbd(Win)}}}+{{{kbd(q)}}}                                  | Restart xmonad. This reloads xmonad configuration, does not logout            |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(q)}}}                 | Quit xmonad and logout                                                        |
+| {{{kbd(Win)}}}+{{{kbd([1-9])}}}                              | Switch to workspace 1-9, depending on which number was pressed                |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd([1-9])}}}             | Send focused window to workspace 1-9                                          |
+| {{{kbd(Win)}}}+{{{kbd(w)}}}                                  | Focus left-most monitor (Xinerama screen 1)                                   |
+| {{{kbd(Win)}}}+{{{kbd(e)}}}                                  | Focus center-most monitor (Xinerama screen 2)                                 |
+| {{{kbd(Win)}}}+{{{kbd(r)}}}                                  | Focus right-most monitor (Xinerama screen 3)                                  |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(w)}}}                 | Send focused window to workspace on left-most monitor                         |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(e)}}}                 | Send focused window to workspace on center-most monitor                       |
+| {{{kbd(Win)}}}+{{{kbd(Shift)}}}+{{{kbd(r)}}}                 | Send focused window to workspace on right-most monitor                        |
+| {{{kbd(Win)}}}+{{{kbd(Left Mouse Drag)}}}                    | Drag focused window out of tiling                                             |
+| {{{kbd(Win)}}}+{{{kbd(Right Mouse Drag)}}}                   | Resize focused window, bring out of tiling if needed                          |
+| {{{kbd(Win)}}}+{{{kbd(Right Mouse Drag)}}}                   | Resize focused window, bring out of tiling if needed                          |
+
+* Personalizing or modifying xmonad-config
+  
+Once cloned, xmonad-config is laid out as follows.
+
+All xmonad configuration is in ~/.xmonad/xmonad.hs.  This includes things like key bindings, colors, layouts, etc.  You may need to have some basic understanding of [[https://wiki.haskell.org/Haskell][Haskell]] in order to modify this file, but most people have no problems.
+
+Most of the xmobar configuration is in ~/.xmonad/xmobar.hs.
+
+All scripts are in ~/.xmonad/bin/.  Scripts are provided to do things like take screenshots, start the system tray, start dmenu, or fix your multi-head layout after a fullscreen application may have turned off one of the screens. 
+
+Colors set in the xmobar config and dmenu script are meant to coincide with the [[http://toddwerth.com/2008/04/30/the-last-vim-color-scheme-youll-ever-need/][IR_Black terminal and vim themes]].
