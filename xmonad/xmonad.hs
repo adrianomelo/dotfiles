@@ -507,7 +507,7 @@ myStartupHook = do
 -- Run xmonad with all the defaults we set up.
 --
 main = do
-  xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc.hs"
+  xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar-fancy.hs"
   -- xmproc <- spawnPipe "taffybar"
   xmonad $ docks
          $ withNavigation2DConfig myNav2DConf
