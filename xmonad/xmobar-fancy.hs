@@ -69,7 +69,7 @@ Config {
                              ] 50
                           
         -- memory usage monitor
-        , Run Memory         [ "--template" ,"Mem: <usedratio>% <total>GB"
+        , Run Memory         [ "--template" ,"Mem: <usedratio>%"
                              , "--Low"      , "20"        -- units: %
                              , "--High"     , "90"        -- units: %
                              , "--low"      , "darkgreen"

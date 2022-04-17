@@ -1,3 +1,3 @@
 
-xloadimage -onroot -zoom 100 /home/amelo/beach4.jpg
+xloadimage -onroot -zoom 70 /home/amelo/wallpaper2.jpg
 
